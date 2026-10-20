@@ -1,0 +1,857 @@
+/* ==========================================================================
+   CANVASA — PREMIUM COMING SOON LANDING PAGE
+   Brand Identity:
+     Black:          #000000
+     Cyan Blue:      #0797CF
+     Magenta Pink:   #E80E4C
+     Golden Yellow:  #FFC629
+     White:          #FFFFFF
+     Background:     #FAFAFA
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --color-black: #000000;
+  --color-blue: #0797cf;
+  --color-pink: #e80e4c;
+  --color-yellow: #ffc629;
+  --color-white: #ffffff;
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+
+  --color-text-primary: #000000;
+  --color-text-secondary: #4a4a4a;
+  --color-text-muted: #737373;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-subtle: rgba(0, 0, 0, 0.04);
+  --color-border-hover: rgba(0, 0, 0, 0.16);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+
+  --shadow-card: 0 20px 48px -12px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --header-height: 114px;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Base Styles
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Ambient Drafting Canvas Background
+   -------------------------------------------------------------------------- */
+.canvas-ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  contain: strict;
+  background:
+    radial-gradient(circle at 5% 5%, rgba(7, 151, 207, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 95% 85%, rgba(232, 14, 76, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(255, 198, 41, 0.04) 0%, transparent 35%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px) 0 0 / 48px 48px;
+  mask-image: radial-gradient(circle at 50% 40%, black 45%, transparent 92%);
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, black 45%, transparent 92%);
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   4. Header & Prominent Logo
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  transition: background-color 0.2s var(--ease-out);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Logo Link — safe #top destination */
+.header-logo-link {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  padding: 0.25rem 0;
+  transition: opacity 0.2s ease, transform 0.2s var(--ease-out);
+}
+
+.header-logo-link:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* Prominent Logo: ~210–235px desktop, crystal-sharp high-DPI rendering */
+.header-logo-img {
+  width: clamp(195px, 17vw, 235px);
+  height: auto;
+  aspect-ratio: 1600 / 774;
+  object-fit: contain;
+  display: block;
+}
+
+/* Understated Status Badge */
+.header-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 0.95rem;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.header-status:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.status-beacon {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.beacon-core {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-pink);
+}
+
+.beacon-pulse {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background-color: var(--color-pink);
+  opacity: 0.4;
+  animation: pulseBeacon 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes pulseBeacon {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  70% { transform: scale(2.3); opacity: 0; }
+  100% { transform: scale(2.3); opacity: 0; }
+}
+
+.status-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   5. Hero Section
+   -------------------------------------------------------------------------- */
+.site-main {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 3.5rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+/* Left: Content Column */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Eyebrow */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 1.35rem;
+}
+
+.eyebrow-pip {
+  width: 7px;
+  height: 7px;
+  border-radius: 1.5px;
+  display: inline-block;
+}
+
+.pip-blue { background-color: var(--color-blue); }
+.pip-pink { background-color: var(--color-pink); }
+.pip-yellow { background-color: var(--color-yellow); }
+.pip-black { background-color: var(--color-black); }
+
+.eyebrow-text {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  margin-left: 5px;
+}
+
+/* Large Confident Headline */
+.hero-headline {
+  font-size: clamp(2.6rem, 5.2vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  color: var(--color-black);
+  margin-bottom: 1.5rem;
+}
+
+.headline-br {
+  display: inline;
+}
+
+.shape-word {
+  position: relative;
+  display: inline-block;
+}
+
+.accent-dot {
+  color: var(--color-blue);
+  display: inline-block;
+  margin-left: -0.01em;
+}
+
+/* Supporting Paragraph */
+.hero-paragraph {
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  line-height: 1.62;
+  color: var(--color-text-secondary);
+  max-width: 36rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+/* Action Block: Prominent Coming Soon + Secondary Notice */
+.hero-action-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 2.75rem;
+}
+
+.coming-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  align-self: flex-start;
+  padding: 0.65rem 1.35rem;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-radius: 9999px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+}
+
+.coming-soon-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+.badge-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--color-blue);
+  box-shadow: 0 0 10px var(--color-blue);
+  animation: pulseDot 2.2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+
+.badge-text {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--color-white);
+}
+
+.development-notice {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Brand Pillars Strip */
+.brand-pillars {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.pillar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pillar-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.blue-accent { color: var(--color-blue); }
+.pink-accent { color: var(--color-pink); }
+.yellow-accent { color: #d49808; }
+
+.pillar-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+}
+
+.pillar-sep {
+  color: var(--color-border);
+  font-weight: 300;
+}
+
+/* --------------------------------------------------------------------------
+   6. Custom Geometric Visual Composition (Right Column)
+   -------------------------------------------------------------------------- */
+.hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.geometric-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1 / 1.05;
+  perspective: 1000px;
+  transition: transform 0.25s var(--ease-out);
+}
+
+/* Corner Frame Brackets Matching the Canvasa Logo */
+.corner-bracket {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  transition: transform 0.25s var(--ease-out);
+}
+
+/* Top-Left: Blue Vertical + Black Horizontal */
+.corner-tl {
+  top: -12px;
+  left: -12px;
+  width: 52px;
+  height: 52px;
+}
+
+.bar-blue-v {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 48px;
+  background-color: var(--color-blue);
+  border-radius: 1px;
+}
+
+.bar-black-h {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: 36px;
+  height: 12px;
+  background-color: var(--color-black);
+  border-radius: 1px;
+}
+
+/* Top-Right: Pink Horizontal + Black Vertical */
+.corner-tr {
+  top: -12px;
+  right: -12px;
+  width: 52px;
+  height: 52px;
+}
+
+.bar-pink-h {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  width: 40px;
+  height: 12px;
+  background-color: var(--color-pink);
+  border-radius: 1px;
+}
+
+.bar-black-v {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 38px;
+  background-color: var(--color-black);
+  border-radius: 1px;
+}
+
+/* Bottom-Left: Black Vertical + Golden Yellow Horizontal */
+.corner-bl {
+  bottom: -12px;
+  left: -12px;
+  width: 52px;
+  height: 52px;
+}
+
+.bar-black-v2 {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  width: 12px;
+  height: 36px;
+  background-color: var(--color-black);
+  border-radius: 1px;
+}
+
+.bar-yellow-h {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 48px;
+  height: 12px;
+  background-color: var(--color-yellow);
+  border-radius: 1px;
+}
+
+/* Bottom-Right Stamp */
+.corner-br {
+  bottom: -10px;
+  right: -6px;
+  display: flex;
+  align-items: center;
+}
+
+.bracket-stamp {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  background: var(--color-background);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+/* Hover Response on Corners */
+.geometric-canvas:hover .corner-tl { transform: translate(-3px, -3px); }
+.geometric-canvas:hover .corner-tr { transform: translate(3px, -3px); }
+.geometric-canvas:hover .corner-bl { transform: translate(-3px, 3px); }
+.geometric-canvas:hover .corner-br { transform: translate(2px, 2px); }
+
+/* Internal Surface Card */
+.canvas-plate {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.75rem;
+  transition: box-shadow 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+
+.geometric-canvas:hover .canvas-plate {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 24px 54px -10px rgba(0, 0, 0, 0.09), 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.plate-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Plate Header */
+.plate-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.plate-code {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+}
+
+.plate-status {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  background-color: rgba(7, 151, 207, 0.08);
+  color: var(--color-blue);
+  border-radius: 4px;
+  border: 1px solid rgba(7, 151, 207, 0.2);
+}
+
+/* Plate Center: Prominent Canvasa Brand Mark */
+.plate-center {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.25rem 1rem;
+}
+
+.plate-logo-img {
+  width: clamp(190px, 18vw, 245px);
+  height: auto;
+  aspect-ratio: 1600 / 774;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.04));
+  transition: transform 0.25s var(--ease-out);
+}
+
+.geometric-canvas:hover .plate-logo-img {
+  transform: scale(1.03);
+}
+
+/* Plate Footer */
+.plate-bottom {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.spec-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.spec-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.spec-val {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.spec-val.active-pink {
+  color: var(--color-pink);
+}
+
+/* --------------------------------------------------------------------------
+   7. Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  padding: 2rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-copy {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.footer-status {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   8. Responsive Design
+   -------------------------------------------------------------------------- */
+
+/* Tablet & Smaller Laptops (<= 960px) */
+@media screen and (max-width: 960px) {
+  :root {
+    --header-height: 94px;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .hero-right {
+    order: 2;
+    width: 100%;
+    padding: 1rem 0;
+  }
+
+  .geometric-canvas {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+/* Mobile & Handheld (<= 768px) */
+@media screen and (max-width: 768px) {
+  :root {
+    --header-height: 86px;
+  }
+
+  .site-main {
+    padding: 2.25rem 0;
+  }
+
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  .header-logo-img {
+    width: clamp(150px, 38vw, 175px);
+  }
+
+  .hero-headline {
+    font-size: clamp(2.2rem, 7vw, 3rem);
+  }
+
+  .brand-pillars {
+    gap: 0.75rem;
+  }
+
+  .pillar-sep {
+    display: none;
+  }
+
+  .pillar-item {
+    background: #fff;
+    padding: 0.35rem 0.65rem;
+    border-radius: 4px;
+    border: 1px solid var(--color-border);
+  }
+
+  .geometric-canvas {
+    max-width: 380px;
+  }
+
+  .canvas-plate {
+    padding: 1.25rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Compact Mobile (<= 540px) */
+@media screen and (max-width: 540px) {
+  .header-status {
+    padding: 0.35rem 0.65rem;
+  }
+
+  .status-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+  }
+
+  .corner-tl,
+  .corner-tr,
+  .corner-bl,
+  .corner-br {
+    display: none;
+  }
+
+  .geometric-canvas {
+    max-width: 100%;
+  }
+
+  .plate-bottom {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+}
+
+/* Narrow Mobile (<= 380px) */
+@media screen and (max-width: 380px) {
+  :root {
+    --header-height: 78px;
+  }
+
+  .container {
+    padding: 0 0.85rem;
+  }
+
+  .header-logo-img {
+    width: 145px;
+  }
+
+  .status-label {
+    display: none;
+  }
+
+  .status-beacon {
+    margin: 0 2px;
+  }
+
+  .hero-headline {
+    font-size: 1.95rem;
+  }
+
+  .hero-paragraph {
+    font-size: 1rem;
+  }
+
+  .coming-soon-badge {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Accessibility: Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
